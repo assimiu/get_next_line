@@ -12,7 +12,7 @@
 
 #ifndef GET_NEXT_LINE
 # define GET_NEXT_LINE
-# define BUFFER_SIZE 28
+# define BUFFER_SIZE 2
 
 # include <stdio.h>
 # include <unistd.h>
@@ -24,6 +24,7 @@ char	*get_next_line(int fd);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *s1);
-void	ft_bzero(void *s, size_t n);
+char	*findnewline(const char *s, int c);
+char	*ft_strchr(const char *s, int c);
 
 #endif

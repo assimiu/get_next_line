@@ -11,8 +11,8 @@ all: $(NAME)
 $(NAME): $(OBJ)
 		$(BB) $(NAME) $(OBJ)
 
-%.o%.c:
-	$(GCC) -D BUFFER_SIZE=5 -c $< -o $@
+%.o: %.c
+	$(GCC) -c $< -o $@
 
 clean:
 	$(RM) $(OBJ) Main.o

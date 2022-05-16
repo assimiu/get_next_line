@@ -24,10 +24,6 @@ void	*ft_memset(void *b, int c, size_t len)
 	return (b);
 }
 
-void	ft_bzero(void *s, size_t n)
-{
-	ft_memset(s, 0, n);
-}
 
 void	*ft_calloc(size_t count, size_t size)
 {
@@ -36,7 +32,7 @@ void	*ft_calloc(size_t count, size_t size)
 	alocacao = (void *) malloc(size * count);
 	if (!alocacao)
 		return (0);
-	ft_bzero(alocacao, (size * count));
+	ft_memset(alocacao, 0, (size * count));
 	return (alocacao);
 }
 
@@ -103,4 +99,18 @@ char	*ft_strdup(const char *s1)
 	}
 	ptr[n] = '\0';
 	return (ptr);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	char	*chr;
+
+	chr = (char *) s;
+	while ((char) c != *chr)
+	{
+		if (*chr == 0)
+			return (0);
+		++ chr;
+	}
+	return (chr);
 }

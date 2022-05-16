@@ -16,8 +16,9 @@ int	main(void)
 {
 	int		o;
 
-	printf("Compilacao\n");
+	printf("\n+++Compilacao+++\n");
 	o = open("txt.txt", O_RDONLY);
-	printf("%s\n", get_next_line(o));
+	printf("%s", get_next_line(o));
+	printf("%s", get_next_line(o));
 	
 }

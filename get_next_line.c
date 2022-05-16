@@ -12,21 +12,7 @@
 
 #include "get_next_line.h"
 
-int	find_char(char *str, int c)
-{
-	size_t	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (1);
-		i ++;
-	}
-	return (0);
-}
+static char		*resto_lido;
 
 size_t	ft_strlen(const char *s)
 {
@@ -40,24 +26,50 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
+char	*findnewline(const char *s, int c)
+{
+	size_t		i;
+	char		*apt;
+
+	i = 0;
+	while (s[i] != c && s[i] != 0)
+	{
+		++ i;
+	}
+	apt = (char *) malloc(sizeof(char) * (i + 1));
+	i = 0;
+	while (s[i] != c && s[i] != 0)
+	{
+		apt[i] = s[i];
+		i ++;
+	}
+	apt[i] = 0;
+	return (apt);
+}
+
 char	*get_next_line(int fd)
 {
 	size_t		r;
-	char		*str;
+	size_t		i;
+	size_t		lenft;
+	char		*retorno;
 	char		*apt;
-	char		*tmp;
-
-	r = 1;
+	
 	apt = (char *) ft_calloc(BUFFER_SIZE, sizeof(char));
-	str = (char *) malloc(sizeof(char));
-	while (r > 0 && !find_char(apt, '\n'))
+	r = read(fd, apt, BUFFER_SIZE);
+	retorno = findnewline(apt, '\n');
+	i = ft_strlen(retorno);
+	lenft = ft_strlen(apt);
+	if (resto_lido != 0)
+		retorno = ft_strjoin(resto_lido, retorno);
+	resto_lido = (char *) malloc(sizeof(char) * (lenft - i + 1));
+	lenft = 0;
+	while (apt[i] != 0)
 	{
-		r = read(fd, apt, BUFFER_SIZE);
-		tmp = ft_strdup(str);
-		free(str);
-		str = ft_strjoin(tmp, apt);
-		free(tmp);
+		resto_lido[lenft] = apt[i];
+		i ++;
+		lenft ++;
 	}
-	free(apt);
-	return (str);
+	resto_lido[lenft] = 0;
+	return (retorno);
 }
