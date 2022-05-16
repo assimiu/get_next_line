@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   Main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amane <amane@studente.42lisboa.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 09:40:45 by amane             #+#    #+#             */
-/*   Updated: 2022/03/22 12:49:08 by amane            ###   ########.fr       */
+/*   Created: 2022/03/22 09:56:07 by amane             #+#    #+#             */
+/*   Updated: 2022/03/22 12:51:13 by amane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE
-# define GET_NEXT_LINE
-# define BUFFER_SIZE 28
+#include "get_next_line.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdlib.h>
+int	main(void)
+{
+	int		o;
 
-size_t	ft_strlen(const char *s);
-char	*get_next_line(int fd);
-void	*ft_calloc(size_t count, size_t size);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strdup(const char *s1);
-void	ft_bzero(void *s, size_t n);
-
-#endif
+	printf("Compilacao\n");
+	o = open("txt.txt", O_RDONLY);
+	printf("%s\n", get_next_line(o));
+	
+}
