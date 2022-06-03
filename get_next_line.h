@@ -6,25 +6,20 @@
 /*   By: amane <amane@studente.42lisboa.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:40:45 by amane             #+#    #+#             */
-/*   Updated: 2022/03/22 12:49:08 by amane            ###   ########.fr       */
+/*   Updated: 2022/06/03 10:59:27 by amane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE
-# define GET_NEXT_LINE
-# define BUFFER_SIZE 2
-
-# include <stdio.h>
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFFER_SIZE 1
 # include <unistd.h>
-# include <fcntl.h>
 # include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
 
-size_t	ft_strlen(const char *s);
 char	*get_next_line(int fd);
-void	*ft_calloc(size_t count, size_t size);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strdup(const char *s1);
-char	*findnewline(const char *s, int c);
-char	*ft_strchr(const char *s, int c);
-
+size_t	ft_strlen(char *s);
+char	*ft_strchr(char *s, int c);
+char	*ft_strjoin(char *s1, char *s2);
 #endif

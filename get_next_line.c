@@ -6,70 +6,81 @@
 /*   By: amane <amane@studente.42lisboa.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:22:41 by amane             #+#    #+#             */
-/*   Updated: 2022/03/22 12:52:44 by amane            ###   ########.fr       */
+/*   Updated: 2022/06/03 11:05:26 by amane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+# include "get_next_line.h"
 
-static char		*resto_lido;
-
-size_t	ft_strlen(const char *s)
+char	*read_charcts(char *content, int fd)
 {
-	size_t		i;
+	int		result_read;
+	char	*str;
 
-	i = 0;
-	while (s[i] != 0)
+	while (1)
 	{
-		i ++;
+		str = (char *) malloc (sizeof(char) * (BUFFER_SIZE + 1));
+		if (!str)
+			return (NULL);
+		result_read = read(fd, str, BUFFER_SIZE);
+		content = ft_strjoin(content, str);
+		if (result_read == 0)
+			return (content);
+		if (ft_strchr(content, '\n'))
+			return (content);
 	}
-	return (i);
 }
 
-char	*findnewline(const char *s, int c)
+char	*split_content_newline(char *content)
 {
-	size_t		i;
-	char		*apt;
+	int		position;
+	int		index;
+	char	*str;
 
-	i = 0;
-	while (s[i] != c && s[i] != 0)
+	if (!content)
+		return (NULL);
+	position = 0;
+	index = 0;
+	while (content[position])
 	{
-		++ i;
+		if (content[position] == '\n')
+			break ;
+		position ++;
 	}
-	apt = (char *) malloc(sizeof(char) * (i + 1));
-	i = 0;
-	while (s[i] != c && s[i] != 0)
+	position ++;
+	str = (char *) malloc(sizeof(char) * (position + 1));
+	while (index < position)
 	{
-		apt[i] = s[i];
-		i ++;
+		str[index] = content[index];
+		index ++;
 	}
-	apt[i] = 0;
-	return (apt);
+	str[index] = 0;
+	return (str);
+}
+
+char	*atualizar_conteudo(char *conteudo)
+{
+	size_t		position;
+
+	position = 0;
+	while (conteudo[position] && conteudo[position] != '\n')
+		position ++;
+	return (&conteudo[position + 1]);
 }
 
 char	*get_next_line(int fd)
 {
-	size_t		r;
-	size_t		i;
-	size_t		lenft;
-	char		*retorno;
-	char		*apt;
-	
-	apt = (char *) ft_calloc(BUFFER_SIZE, sizeof(char));
-	r = read(fd, apt, BUFFER_SIZE);
-	retorno = findnewline(apt, '\n');
-	i = ft_strlen(retorno);
-	lenft = ft_strlen(apt);
-	if (resto_lido != 0)
-		retorno = ft_strjoin(resto_lido, retorno);
-	resto_lido = (char *) malloc(sizeof(char) * (lenft - i + 1));
-	lenft = 0;
-	while (apt[i] != 0)
-	{
-		resto_lido[lenft] = apt[i];
-		i ++;
-		lenft ++;
-	}
-	resto_lido[lenft] = 0;
-	return (retorno);
+	static char	*content;
+	char		*str;
+	size_t		size_str;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	content = read_charcts(content, fd);
+	str = split_content_newline(content);
+	content = atualizar_conteudo(content);
+	size_str = ft_strlen(str);
+	if (size_str == 0)d
+		return (NULL);
+	return (str);
 }
