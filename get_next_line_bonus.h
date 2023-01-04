@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amane <amane@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 21:16:57 by gafreita          #+#    #+#             */
-/*   Updated: 2022/03/14 21:53:32 by gafreita         ###   ########.fr       */
+/*   Created: 2023/01/04 12:33:39 by amane             #+#    #+#             */
+/*   Updated: 2023/01/04 12:39:04 by amane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
+
 char		*get_next_line(int fd);
-char		*fill_line(char *buff, char *line);
-void		reffil_buffer(char *buff);
+char		*copy_new_str(char *buff, char *line);
+void		save_last_nline(char *buff);
 size_t		ft_strlen(const char *str);
 char		*ft_strchr(const char *s, int c);
 

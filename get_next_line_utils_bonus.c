@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amane <amane@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 21:17:08 by gafreita          #+#    #+#             */
-/*   Updated: 2022/03/14 21:54:26 by gafreita         ###   ########.fr       */
+/*   Created: 2023/01/04 12:37:39 by amane             #+#    #+#             */
+/*   Updated: 2023/01/04 12:39:07 by amane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ size_t	ft_strlen(const char *str)
 	return (cont);
 }
 
-char	*fill_line(char *buff, char *line)
+char	*copy_new_str(char *buff, char *line)
 {
 	char	*aux;
 	int		i;
@@ -57,7 +57,7 @@ char	*fill_line(char *buff, char *line)
 	return (line);
 }
 
-void	reffil_buffer(char *buff)
+void	save_last_nline(char *buff)
 {
 	int	i;
 	int	j;

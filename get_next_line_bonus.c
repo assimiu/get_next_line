@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gafreita <gafreita@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amane <amane@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 21:18:35 by gafreita          #+#    #+#             */
-/*   Updated: 2022/03/14 21:54:50 by gafreita         ###   ########.fr       */
+/*   Created: 2023/01/04 12:37:03 by amane             #+#    #+#             */
+/*   Updated: 2023/01/04 12:37:33 by amane            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char	*get_next_line(int fd)
 		if (!buff[fd][0])
 			check = read(fd, buff[fd], BUFFER_SIZE);
 		if (check > 0)
-			line = fill_line(buff[fd], line);
-		reffil_buffer(buff[fd]);
+			line = copy_new_str(buff[fd], line);
+		save_last_nline(buff[fd]);
 		if (!check || ft_strchr(line, '\n'))
 			break ;
 	}
